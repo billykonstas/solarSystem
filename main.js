@@ -416,7 +416,9 @@ animate();
 
 //EventListeners
 //Planet Selector
-window.onload = window.addEventListener('click', event => {
+window.addEventListener('load', (event) => {
+  console.log('page is fully loaded');
+	window.addEventListener('click', event => {
 
     clickMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     clickMouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
@@ -436,6 +438,7 @@ window.onload = window.addEventListener('click', event => {
     }
   }
 );
+});
 
 //Functions
 
