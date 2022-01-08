@@ -432,7 +432,7 @@ window.addEventListener('click', event => {
       isPlanetSelected = true;
       console.log('Selected Planet', selectedPlanet.userData.planetName);
       localStorage.setItem('selectedPlanet', selectedPlanet.userData.planetName);
-      location.href = 'planet.html';
+      location.href = './planet.html';
     }
   }
 );
