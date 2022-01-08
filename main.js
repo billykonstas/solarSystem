@@ -1,21 +1,11 @@
 //import './style.css'
 
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
-
 import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js';
-
-import {OBJLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/OBJLoader.js';
-
-import {MTLLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/MTLLoader.js';
-import { LoadingManager, MathUtils, Vector3 } from 'https://unpkg.com/three@0.127.0/build/three.module.js';
-
-//import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
-
 import { EffectComposer } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass} from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/UnrealBloomPass.js';
-//import { TextGeometry } from 'https://unpkg.com/three@0.127.0/examples/jsm/geometries/TextGeometry.js';
-//import { FontLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/FontLoader.js';
+
 
 var planetOrbits = [];
 
@@ -101,7 +91,8 @@ const sun = new THREE.Mesh (
   new THREE.SphereGeometry(sunRad, 24, 24),
   new THREE.MeshBasicMaterial(
     {
-      map : new THREE.TextureLoader(loadingManager).load('./img/sun.jpg')
+      map : new THREE.TextureLoader(loadingManager).load('./img/sun.jpg'),
+      side: THREE.DoubleSide
     }
 )
 );
@@ -423,7 +414,7 @@ document.addEventListener('click', event => {
     clickMouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
     raycaster.setFromCamera( clickMouse, camera );
-    const found = raycaster.intersectObjects ( scene.children );
+    let found = raycaster.intersectObjects ( scene.children, true );
     if (found.length > 0 && found[0].object.userData.selectable)
     {
       selectedPlanet = found[0].object;
@@ -470,12 +461,6 @@ function planetXPosition(value, index)
 {
   value.position.set (planetsPosX[index], 0, 0);
 }
-
-//gui
-// const gui = new GUI();
-// const orbitFolder = gui.addFolder('Orbits');
-// orbitFolder.add(planetOrbits, 'visible');
-
 //Make all planets pivot around sun
 function setPlanetsPivotable ()
 {
