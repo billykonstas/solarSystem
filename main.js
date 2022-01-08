@@ -6,7 +6,7 @@ import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/contro
 
 import {OBJLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/OBJLoader';
 
-import {MTLLoader} from 'three/examples/jsm/loaders/MTLLoader';
+import {MTLLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/MTLLoader';
 import { LoadingManager, MathUtils, Vector3 } from 'https://unpkg.com/three@0.127.0/';
 
 //import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
