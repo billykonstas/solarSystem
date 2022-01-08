@@ -416,7 +416,7 @@ animate();
 
 //EventListeners
 //Planet Selector
-window.addEventListener('click', event => {
+document.addEventListener('click', event => {
 
     event.preventDefault();
     clickMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
