@@ -1,21 +1,14 @@
 //import './style.css'
 
-import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
+import * as THREE from 'three';
+import { Mesh } from 'three';
 
-import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
-import {OBJLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/OBJLoader.js';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-import {MTLLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/MTLLoader.js';
-import { LoadingManager, MathUtils, Vector3 } from 'https://unpkg.com/three@0.127.0/build/three.module.js';
-
-//import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
-
-import { EffectComposer } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/RenderPass.js';
-import { UnrealBloomPass} from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/UnrealBloomPass.js';
-//import { TextGeometry } from 'https://unpkg.com/three@0.127.0/examples/jsm/geometries/TextGeometry.js';
-//import { FontLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/FontLoader.js';
 
 var planetOrbits = [];
 
@@ -82,11 +75,8 @@ scene.background = spaceTexture;
 
 //Planet Selection
 const raycaster = new THREE.Raycaster();
-const hoverRaycaster = new THREE.Raycaster();
-const hoverMouse = new THREE.Vector2();
 const clickMouse = new THREE.Vector2();
 var selectedPlanet = new THREE.Object3D();
-var hoverPLanet = new THREE.Object3D();
 var planetName = '';
 var pivotName = new THREE.Object3D();
 var pivotable = new THREE.Object3D();
@@ -101,7 +91,8 @@ const sun = new THREE.Mesh (
   new THREE.SphereGeometry(sunRad, 24, 24),
   new THREE.MeshBasicMaterial(
     {
-      map : new THREE.TextureLoader(loadingManager).load('./img/sun.jpg')
+      map : new THREE.TextureLoader(loadingManager).load('./img/sun.jpg'),
+      side: THREE.DoubleSide
     }
 )
 );
@@ -414,30 +405,6 @@ planetOrbitPosition();
 setPlanetsPivotable();
 animate();
 
-//EventListeners
-//Planet Selector
-document.addEventListener('click', event => {
-
-    event.preventDefault();
-    clickMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-    clickMouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-    raycaster.setFromCamera( clickMouse, camera );
-    const found = raycaster.intersectObjects ( scene.children );
-    if (found.length > 0 && found[0].object.userData.selectable)
-    {
-      selectedPlanet = found[0].object;
-      if (selectedPlanet.userData.planetName == 'Saturn' || selectedPlanet.userData.planetName == 'Saturn Ring') {
-        selectedPlanet = saturnWithRing;
-      }
-      isPlanetSelected = true;
-      console.log('Selected Planet', selectedPlanet.userData.planetName);
-      localStorage.setItem('selectedPlanet', selectedPlanet.userData.planetName);
-      location.href = './planet.html';
-    }
-  }
-);
-
 //Functions
 
 //loadingManager
@@ -471,11 +438,6 @@ function planetXPosition(value, index)
   value.position.set (planetsPosX[index], 0, 0);
 }
 
-//gui
-// const gui = new GUI();
-// const orbitFolder = gui.addFolder('Orbits');
-// orbitFolder.add(planetOrbits, 'visible');
-
 //Make all planets pivot around sun
 function setPlanetsPivotable ()
 {
@@ -500,6 +462,33 @@ cloudMesh.geometry = cloudGeometry;
 earth.add(cloudMesh);
 
 }
+
+
+//EventListeners
+//Planet Selector
+document.addEventListener('click', event => {
+
+  event.preventDefault();
+  clickMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  clickMouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+  //mesh.updateMatrixWorld();
+  raycaster.setFromCamera( clickMouse, camera );
+  let found = raycaster.intersectObjects ( scene.children, true );
+  if (found.length > 0 && found[0].object.userData.selectable)
+  {
+    selectedPlanet = found[0].object;
+    if (selectedPlanet.userData.planetName == 'Saturn' || selectedPlanet.userData.planetName == 'Saturn Ring') {
+      selectedPlanet = saturnWithRing;
+    }
+    isPlanetSelected = true;
+    console.log('Selected Planet', selectedPlanet.userData.planetName);
+    localStorage.setItem('selectedPlanet', selectedPlanet.userData.planetName);
+    location.href = './planet.html';
+  }
+}
+);
+
 
 function animate() {
 
