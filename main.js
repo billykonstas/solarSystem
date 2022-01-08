@@ -2,20 +2,20 @@ import './style.css'
 
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls';
 
-import {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader';
+import {OBJLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/OBJLoader';
 
 import {MTLLoader} from 'three/examples/jsm/loaders/MTLLoader';
-import { LoadingManager, MathUtils, Vector3 } from 'three';
+import { LoadingManager, MathUtils, Vector3 } from 'https://unpkg.com/three@0.127.0/';
 
 //import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { EffectComposer } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass} from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { TextGeometry } from 'https://unpkg.com/three@0.127.0/examples/jsm/geometries/TextGeometry.js';
+import { FontLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/FontLoader';
 
 var planetOrbits = [];
 
