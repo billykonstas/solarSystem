@@ -14,8 +14,8 @@ import { LoadingManager, MathUtils, Vector3 } from 'https://unpkg.com/browse/thr
 import { EffectComposer } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass} from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { TextGeometry } from 'https://unpkg.com/three@0.127.0/examples/jsm/geometries/TextGeometry.js';
-import { FontLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/FontLoader.js';
+//import { TextGeometry } from 'https://unpkg.com/three@0.127.0/examples/jsm/geometries/TextGeometry.js';
+//import { FontLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/FontLoader.js';
 
 //LoadingScreen
 var RESOURCES_LOADED = false;
